@@ -1,0 +1,4 @@
+How to use:
+1. Create virtual environment scraper and install packages
+2. Code in initial.py, credentials in creds.json for google sheet
+3. bash test.sh to run file
