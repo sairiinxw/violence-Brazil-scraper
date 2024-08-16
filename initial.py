@@ -17,8 +17,8 @@ sheet = workbook.worksheet("Raw Data")
 
 # web scraper
 
-x = 1
-url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(x) + ".ghtml"
+page = 1
+url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(page) + ".ghtml"
 try:
     session = HTMLSession()
     response = session.get(url)
@@ -36,20 +36,28 @@ try:
                 'title' : heading.text,
                 'link' : heading.absolute_links
             }
-            results.append(newsarticle)
-            print(newsarticle)
             # sheet.update_cell(len(results), 1, 'O Globo')
             # sheet.update_cell(len(results), 2, newsarticle.get('title'))
             # sheet.update_cell(len(results), 3, newsarticle.get('link'))
             # time.sleep(random.randrange(1, 40, 2))
-            if (newsarticle.get('title') == ''):
-                x = x + 2
-                url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(x) + ".ghtml"
+            if ((newsarticle.get('title') != '') and (page > 1)):
+                for i in range (len(results) - 16, len(results) - 1):
+                    if (newsarticle.get('title') == results[i].get('title')):
+                        break
+                else:
+                    results.append(newsarticle)
+                    print(newsarticle)
+            elif (newsarticle.get('title') == ''):
+                page = page + 2
+                url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(page) + ".ghtml"
 
-                session = HTMLSession()
                 response = session.get(url)
-                response.html.render(sleep=2, scrolldown=100)
+                response.html.render(sleep=1, scrolldown=100)
                 articles = response.html.find("h2")
+            else:
+                results.append(newsarticle)
+                print(newsarticle)
+
 
 except requests.exceptions.RequestException as e:
     print(e)
