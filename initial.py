@@ -1,19 +1,10 @@
-# import gspread
-# from google.oauth2.service_account import Credentials
-
 import csv
 import requests
 from requests_html import HTMLSession
 
-# # google spreadsheet initialization (connected to program)
-
-# scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-# creds = Credentials.from_service_account_file("creds.json",scopes=scopes)
-# client = gspread.authorize(creds)
-
-# sheet_id = "1Yrhk75x-urOaxERNbACSQgT6oh-iZEEnxuP3O3Djsh0"
-# workbook = client.open_by_key(sheet_id)
-# sheet = workbook.worksheet("Raw Data")
+#LAST RUN: 8/18/24 10:06 AM PST
+#scraping text output file: output13.txt
+#csv output file: clean_articles13.csv
 
 """
 Begin web scraper program.
@@ -26,8 +17,10 @@ Parameters:
 
 page = 1 # initial page
 url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(page) + ".ghtml" # most recent articles on oglobo
+scrapeNum = 9000 # number of articles you want to scrape
 count = 0 # initial count of scraped articles per page
 totalcount = 0 # initial count of scraped articles in total
+newspaperName = 'O Globo'
 
 try:
     """
@@ -53,12 +46,13 @@ try:
         cleaning (String array): array of the previously comma-separated list of Strings from articleText
         contentBlock: cleaned up 1 paragraph version of all the Strings in the cleaning array (no ads, redundant info, etc.)
     """
-    while (len(results) < 32):
-        for heading in articles: #LAST RUN: 8/18/24 10:06 AM PST
-            if (len(results) < 32): # adjusts number of articles to scrape
+    while (len(results) < scrapeNum):
+        for heading in articles:
+            if (len(results) < scrapeNum): # adjusts number of articles to scrape
+
                 # creates a newsarticle object with: title, link, and content - the single contentBlock cleaned, but currently empty
                 newsarticle = {
-                    'Newspaper' : 'O Globo',
+                    'Newspaper' : newspaperName,
                     'Title' : heading.text,
                     'Link' : heading.absolute_links,
                     'Article Content' : ''
@@ -73,6 +67,7 @@ try:
                         results.append(newsarticle)
                         print(newsarticle)
                         count += 1
+
                 # if the current newsarticle is empty, this indicates that there are no more articles on the current page; renders a new url of most recent articles 2 pages ahead
                 elif (newsarticle.get('Title') == ''):
                     print(f"Number of articles on this page: {count} Number of articles in results: {len(results)} Current page: {page}")
@@ -84,6 +79,7 @@ try:
                     response = session.get(url)
                     response.html.render(sleep=1, scrolldown=100)
                     articles = response.html.find("h2") # reassigns article array
+
                 # appends non-empty article otherwise and increases count
                 else:
                     results.append(newsarticle)
@@ -124,7 +120,7 @@ try:
         
     count = 0 #initializes to 0 to count number of articles placed in csv
 
-    with open('clean_articles.csv', mode='w') as csvfile:
+    with open('clean_articles13.csv', mode='w') as csvfile:
         fieldnames = ['Newspaper', 'Title', 'Link', 'Article Content']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
