@@ -2,9 +2,9 @@ import csv
 import requests
 from requests_html import HTMLSession
 
-#LAST RUN: 8/18/24 10:06 AM PST
-#scraping text output file: output13.txt
-#csv output file: clean_articles13.csv
+#LAST RUN: 9/11/24 8:50 PM PST
+#scraping text output file: output14.txt
+#csv output file: clean_articles14.csv
 
 """
 Begin web scraper program.
@@ -15,12 +15,15 @@ Parameters:
     count (int): number of articles scraped and cleaned
 """
 
+newspaperName = 'O Globo'
 page = 1 # initial page
 url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(page) + ".ghtml" # most recent articles on oglobo
-scrapeNum = 9000 # number of articles you want to scrape
+csv_output_file = 'clean_articles14.csv'
+scrapeNum = 300 # number of articles you want to scrape
+
+
 count = 0 # initial count of scraped articles per page
 totalcount = 0 # initial count of scraped articles in total
-newspaperName = 'O Globo'
 
 try:
     """
@@ -88,6 +91,7 @@ try:
             else:
                 break
 
+    # the count below is often not equal to one another -> needs to be fixed
     print(f"Total articles scraped: {len(results)} Total number counted (direct from site): {totalcount}")
 
     count = 0 #initializes to 0 to count number of articles which we successfuly scrape the content of
@@ -120,7 +124,7 @@ try:
         
     count = 0 #initializes to 0 to count number of articles placed in csv
 
-    with open('clean_articles13.csv', mode='w') as csvfile:
+    with open(csv_output_file, mode='w') as csvfile:
         fieldnames = ['Newspaper', 'Title', 'Link', 'Article Content']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
