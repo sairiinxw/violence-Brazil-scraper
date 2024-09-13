@@ -1,3 +1,0 @@
-### Run12 and Run13 Function
-
-`output12.txt` and `output13.txt` shows an execution of initial.py using the csv version on a server. This execution was meant to test scraping 10,000 and then 500 articles at once and tried to use a server to accelerate runtime. This version scrapes the list of articles on the "Most Recent" page of O'Globo and prints out the article name and link per iteration in 1 loop. Then it scrapes the article content using each article link in a different loop, cleans the content, edits the dictionary of articles, and outputs the article name, link, and content. The execution for csv output did not finish for either runs due to memory limitations in the server, but the runtime was 2x faster using a server.
