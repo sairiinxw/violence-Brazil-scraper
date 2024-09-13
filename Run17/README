@@ -1,0 +1,3 @@
+### Run17 Function
+
+`output17.txt` shows an execution of initial.py during and old csv output version. This run was a test using 30 articles to see if the script was broken due to an unexpected long runtime of Run14. This version scrapes the list of articles on the "Most Recent" page of O'Globo and prints out the article name and link per iteration in 1 loop. Then it scrapes the article content using each article link in a different loop, cleans the content, edits the dictionary of articles, and outputs the article name, link, and content in `clean_articles17.csv`.
