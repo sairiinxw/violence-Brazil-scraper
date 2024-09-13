@@ -1,3 +1,0 @@
-### Run15 and Run16 Function
-
-`output15.txt` and `output16.txt` shows an execution of initial.py during the csv output version. This run was a test using 1000 and 5000 articles after cleaning up the script slighlty. This version scrapes the list of articles on the "Most Recent" page of O'Globo and prints out the article name and link per iteration in 1 loop. Then it scrapes the article content using each article link in a different loop, cleans the content, edits the dictionary of articles, and outputs the article name, link, and content. The script broke when disconnected accidentally during the long runtime for extracting the article content and creating the csv files.
