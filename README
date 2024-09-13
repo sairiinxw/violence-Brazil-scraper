@@ -41,6 +41,8 @@ Run the `test.sh` bash script using `bash test.sh`.
 
 ### Future Development
 
+Try changing `initial.py` by outputting the list of articles directly to a csv file with names and links. Then access articles individually for article content and editing the csv file to add article content. This way, the script can be split into two parts: getting long list of articles and accessing article content.
+
 Test cases need to be written to better test the program.
 
 The `initial.py` script can be cleaned up by better automating renaming the output and csv files by implementing input from the command line and creating individual methods.
