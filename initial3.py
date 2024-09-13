@@ -2,9 +2,9 @@ import csv
 import requests
 from requests_html import HTMLSession
 
-#LAST RUN: 9/11/24 8:50 PM PST
-#scraping text output file: output14.txt
-#csv output file: clean_articles14.csv
+#LAST RUN: 9/12/24 2:03 PM PST
+#scraping text output file: output19.txt
+#csv output file: clean_articles19.csv
 
 """
 Begin web scraper program.
@@ -18,8 +18,8 @@ Parameters:
 newspaperName = 'O Globo'
 page = 1 # initial page
 url = "https://oglobo.globo.com/ultimas-noticias/index/feed/pagina-" + str(page) + ".ghtml" # most recent articles on oglobo
-csv_output_file = 'clean_articles14.csv'
-scrapeNum = 100 # number of articles you want to scrape
+csv_output_file = 'clean_articles19.csv'
+scrapeNum = 5000 # number of articles you want to scrape
 
 
 count = 0 # initial count of scraped articles per page
