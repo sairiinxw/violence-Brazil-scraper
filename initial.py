@@ -36,7 +36,6 @@ try:
     """
     session = HTMLSession()
     response = session.get(url)
-    response.html.render(sleep=1, scrolldown=100)
     articles = response.html.find("h2")
     results = [] # initial array
 

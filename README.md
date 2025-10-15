@@ -4,13 +4,15 @@ violence-Brazil-scraper is a script written to scrape Brazilian newspaper articl
 
 ## Installation
 
+Download Python version 3.6.8 from https://www.python.org/downloads/release/python-368/
+
 Create a virtual environment and activate. Ensure that you are using a version 3+ of Python.
 `python3 -m venv scrapevenv`
 `source scrapevenv/bin/activate`
 
-Use the package manager [pip] or [pip3] to install requests. It is possible that this package name has changed, so follow the directions given if it says to install a different package.
+Use the package manager [pip] or [pip3] to install requests and lxml_html_clean. It is possible that this package name has changed, so follow the directions given if it says to install a different package.
 
-`pip3 install requests-html`
+`pip3 install requests_html` `pip3 install lxml_html_clean`
 
 ## Usage
 
